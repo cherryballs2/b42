@@ -21,20 +21,16 @@ init_stack:
     beq a0, t1, set_stack_core_2
     li t1, 3
     beq a0, t1, set_stack_core_3
-    ret
+    retand
 set_stack_core_0:
     la sp, stack_core_0
-    add sp, sp, t0
     ret
 set_stack_core_1:
     la sp, stack_core_1
-    add sp, sp, t0
     ret
 set_stack_core_2:
     la sp, stack_core_2
-    add sp, sp, t0
     ret
 set_stack_core_3:
     la sp, stack_core_3
-    add sp, sp, t0
     ret

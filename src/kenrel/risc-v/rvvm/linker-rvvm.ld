@@ -1,6 +1,11 @@
+MEMORY
+{
+    ram (wx) : ORIGIN = 0x80000000, LENGTH = 0x80000000
+}
+
 SECTIONS
 {
-    . = 0x80000000; /* Rhe usual risc-v start location */
+    . = 0x80000000;
 
     .text : {
         *(.text)
@@ -13,11 +18,16 @@ SECTIONS
         *(.bss)
         *(COMMON)
     } > ram
-    /* stack */
-    .stack (NOLOAD) : {
-        __stack_start = .;
-        . = . + 4096 * 4;
-        __stack_end = .;
+    
+    /* stack for cores */
+
+    .stack_core_0 (NOLOAD) : {
+        __stack_core_0_start = .;
+        . = . + 8 * 1024;
+        __stack_core_0_end = .;
+    } > ram
+    .uart (NOLOAD) : {
+        __uart_base = 0x10000000; /* UART adress */
     } > ram
 }
 ENTRY(_start)
