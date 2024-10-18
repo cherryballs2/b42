@@ -5,8 +5,9 @@ _start:
     slli t0, t0, 14
     la sp, stack 
     add sp, sp, t0
-    call entry
+    call main
 
+# loop just incase kernel returns (it should never do that)
 loop:
     j loop
 
