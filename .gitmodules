@@ -1,0 +1,3 @@
+[submodule "fishlibc"]
+	path = fishlibc
+	url = https://github.com/urhacksucks/fishlibc
