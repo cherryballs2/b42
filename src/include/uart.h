@@ -1,1 +1,0 @@
-void uart_char(int c);

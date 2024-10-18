@@ -7,10 +7,10 @@ LD = riscv64-elf-ld
 BUILD = build
 
 # Source files
-C_SRC = src/kernel.c
-ASM_SRC = src/bootstrap.s
+C_SRC = kernel-src/kernel.c
+ASM_SRC = kernel-src/bootstrap.s
 # Linker script
-LINKER_SCRIPT = src/linker.ld
+LINKER_SCRIPT = kernel-src/linker.ld
 
 # Flags
 CFLAGS = -Wall -O2
@@ -33,13 +33,13 @@ $(TARGET): $(OBJ) | $(BUILD)
 	@echo "Linking $(TARGET)..."
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJ)
 
-# Compile C++ source file
-$(BUILD)/kernel.o: src/kernel.c | $(BUILD)
+# Compile C source file
+$(BUILD)/kernel.o: kernel-src/kernel.c | $(BUILD)
 	@echo "Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Assemble assembly files
-$(BUILD)/bootstrap.o: src/bootstrap.s | $(BUILD)
+$(BUILD)/bootstrap.o: kernel-src/bootstrap.s | $(BUILD)
 	@echo "Assembling $<..."
 	$(AS) -o $@ $<
 
@@ -52,6 +52,7 @@ clean:
 	@echo "Cleaning up..."
 	rm -rf $(BUILD)/*.o $(TARGET)
 
+# Test the build with QEMU
 test:
 	qemu-system-riscv64 -machine virt -bios none -kernel $(TARGET) -serial mon:stdio
 
