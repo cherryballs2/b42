@@ -1,20 +1,14 @@
 .section .text
 .globl _start
 _start:
-    add t0, a0, 1
-    slli t0, t0, 14
-    la sp, stack 
-    add sp, sp, t0
+    la sp, stack0
+    li a0, 1024*4
+    csrr a1, mhartid
+    addi a1, a1, 1
+    mul a0, a0, a1
+    add sp, sp, a0
     call main
 
 # loop just incase kernel returns (it should never do that)
 loop:
-    j loop
-
-.section .bss.stack
-.align 12
-.globl stack
-stack:
-    .space 8192 * 4 * 4
-.globl stack_top
-stack_top:
+    j loop  

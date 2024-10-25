@@ -13,12 +13,13 @@ ASM_SRC = kernel-src/bootstrap.s
 LINKER_SCRIPT = kernel-src/linker.ld
 
 # Flags
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -O2 -ffreestanding -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
 LDFLAGS = -T $(LINKER_SCRIPT)
 
 
 # Output
-TARGET = $(BUILD)/OS-X5
+TARGET = $(BUILD)/OS-X5.elf
+TARGET_BIN = $(BUILD)/OS-X5.bin
 
 # Object files
 C_OBJ = $(BUILD)/kernel.o
@@ -32,6 +33,7 @@ all: $(TARGET)
 $(TARGET): $(OBJ) | $(BUILD)
 	@echo "Linking $(TARGET)..."
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJ)
+	riscv64-elf-objcopy -O binary $(TARGET) $(TARGET_BIN)
 
 # Compile C source file
 $(BUILD)/kernel.o: kernel-src/kernel.c | $(BUILD)
@@ -47,13 +49,15 @@ $(BUILD)/bootstrap.o: kernel-src/bootstrap.s | $(BUILD)
 $(BUILD):
 	mkdir -p $(BUILD)
 
+fish: 
+	make -C fishlibc
+
 # Clean up build files
 clean:
 	@echo "Cleaning up..."
-	rm -rf $(BUILD)/*.o $(TARGET)
-
+	rm -rf $(BUILD)/*.o $(TARGET) $(TARGET_BIN)
 # Test the build with QEMU
 test:
-	qemu-system-riscv64 -machine virt -bios none -kernel $(TARGET) -serial mon:stdio
+	qemu-system-riscv64 -bios none -nographic -machine virt -kernel $(TARGET_BIN)
 
-.PHONY: all clean test
+.PHONY: all fish clean test 
