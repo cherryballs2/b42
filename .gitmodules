@@ -2,3 +2,6 @@
 	path = fishlibc
 	url = https://github.com/urhacksucks/fishlibc
 
+[submodule "tools-src/tools-for-X5"]
+	path = tools-src/tools-for-X5
+	url = https://github.com/cherrybsdtan/tools-for-X5.git
