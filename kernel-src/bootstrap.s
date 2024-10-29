@@ -11,4 +11,4 @@ _start:
 
 # loop just incase kernel returns (it should never do that)
 loop:
-    j loop  
+    j loop

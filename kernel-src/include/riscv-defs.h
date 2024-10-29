@@ -5,7 +5,7 @@
 #ifndef RISCV_DEFS_H
 #define RISCV_DEFS_H
 
-//
+// r_mhartid
 static inline int
 r_mhartid()
 {

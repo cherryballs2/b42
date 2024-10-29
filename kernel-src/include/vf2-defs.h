@@ -1,0 +1,5 @@
+#define NCPU 4
+#define UART0_BASE 0x10000000
+#define UART0_TXDATA (UART0_BASE + 0x0)
+#define UART0_TXCTRL (UART0_BASE + 0x8)
+#define UART_TX_READY (1 << 31)
