@@ -13,8 +13,8 @@ ASM_SRC = kernel-src/bootstrap.s
 LINKER_SCRIPT = kernel-src/linker.ld
 
 # Flags
-CFLAGS = -Wall -O2 -ffreestanding -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
-LDFLAGS = -T $(LINKER_SCRIPT)
+CFLAGS = -Wall -O2 -ffreestanding -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables  -nostartfiles -g
+LDFLAGS = -T $(LINKER_SCRIPT) -nostdlib
 
 # Output
 TARGET = $(BUILD)/OS-X5.elf
@@ -44,6 +44,7 @@ $(TARGET): $(OBJ) | $(BUILD)
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJ)
 	$(eval PROGRESS=$(shell expr $(PROGRESS) + 1))
 	riscv64-elf-objcopy -O binary $(TARGET) $(TARGET_BIN)
+	riscv64-elf-objdump -d $(TARGET)
 	@echo -e "$(COLOR_GREEN)[$(shell expr $(PROGRESS) \* 100 / $(TOTAL_STEPS))%] Build complete!$(COLOR_RESET)"
 
 # Compile kernel
