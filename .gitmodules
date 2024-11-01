@@ -5,3 +5,6 @@
 [submodule "tools-src/tools-for-X5"]
 	path = tools-src/tools-for-X5
 	url = https://github.com/cherrybsdtan/tools-for-X5.git
+[submodule "tools-src/opensbi"]
+	path = tools-src/opensbi
+	url = https://github.com/starfive-tech/opensbi.git
