@@ -1,7 +1,7 @@
 # Cross-Compile Tools
-CC = riscv64-elf-gcc
-AS = riscv64-elf-as
-LD = riscv64-elf-ld
+CC = riscv64-unknown-elf-gcc
+AS = riscv64-unknown-elf-as
+LD = riscv64-unknown-elf-ld
 
 # Directories
 BUILD = build
@@ -42,8 +42,8 @@ $(TARGET): $(OBJ) | $(BUILD)
 	@echo -e "$(COLOR_YELLOW)[$(shell expr $(PROGRESS) \* 100 / $(TOTAL_STEPS))%] Linking $(TARGET)...$(COLOR_RESET)"
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJ)
 	$(eval PROGRESS=$(shell expr $(PROGRESS) + 1))
-	riscv64-elf-objcopy -O binary $(TARGET) $(TARGET_BIN)
-	riscv64-elf-objdump -d $(TARGET)
+	riscv64-unknown-elf-objcopy -O binary $(TARGET) $(TARGET_BIN)
+	riscv64-unknown-elf-objdump -d $(TARGET)
 	@echo -e "$(COLOR_GREEN)[$(shell expr $(PROGRESS) \* 100 / $(TOTAL_STEPS))%] Build complete!$(COLOR_RESET)"
 
 # Compile kernel
