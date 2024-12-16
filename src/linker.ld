@@ -6,6 +6,7 @@ BASE_ADDRESS = 0x40000000;
 
 SECTIONS
 {
+    /* Load the kernel at this address: "." means the current address */
     . = BASE_ADDRESS;
 
     kernel_start = .;
@@ -19,6 +20,7 @@ SECTIONS
         _trampoline = .;
         *(trampsec)
         . = ALIGN(0x1000);
+        /* Modified ASSERT to allow trampoline size to be less than or equal to one page */
         ASSERT(. - _trampoline <= 0x1000, "error: trampoline larger than one page");
         PROVIDE(etext = .);
     }
