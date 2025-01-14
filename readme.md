@@ -23,3 +23,6 @@
 
 2. **Develop More software**  
    Make more software including a video editor and possibly a posix complient LibOS
+
+# Screenshots and Art
+![x5-os-square](https://github.com/user-attachments/assets/25fed545-9cb1-4ec7-91d4-e2d1ddd675cc)
