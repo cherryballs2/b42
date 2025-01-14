@@ -17,9 +17,10 @@
 
 
 ## Year Two Goals
+
 1. **Support x86_64 cpus**
-   Allow to have the OS to run on old laptops and desktops
+   Allow to have the OS to run on old laptops and desktops.
 
 2. **Add more software**
-   including posix complience Module and a Video Editor
+   including posix complience Module and a Video Editor.
    
