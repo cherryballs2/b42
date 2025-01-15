@@ -3,8 +3,4 @@
 ---
 
 ## What is WILL be talked about.
-[How to install](#how-to-install)
-
----
-
-## How To install
+[How to install on windows](how-to-install-windows)
