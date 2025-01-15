@@ -3,4 +3,4 @@
 ---
 
 ## What is WILL be talked about.
-[How to install on Windows](how-to-install.md)
+[How to install on visionfive2](how-to-install-vf2.md)
