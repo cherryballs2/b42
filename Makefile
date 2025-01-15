@@ -15,7 +15,7 @@ endif
 BUILD = build
 
 # Files needed for build.
-C_SRC = src/kernel.c
+C_SRC = src/kernel/kernel.c
 ifdef VISIONFIVE2
 ASM_SRC = src/visionfive2/bootstrap.s
 LINKER_SCRIPT = src/visionfive2/linker.ld

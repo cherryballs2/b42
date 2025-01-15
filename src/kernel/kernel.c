@@ -1,8 +1,3 @@
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long uint64_t;
-
 int main() {
     uart_putc('X');
     uart_putc('5');
