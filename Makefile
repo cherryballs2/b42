@@ -46,7 +46,7 @@ $(TARGET): $(OBJ) | $(BUILD)
 	$(OBJCOPY) -O binary $(TARGET) $(TARGET_BIN)
 
 # Compile Main Kernel C file
-$(BUILD)/kernel.o: src/visionfive2/kernel.c | $(BUILD)
+$(BUILD)/kernel.o: $(C_SRC) | $(BUILD)
 	@echo "Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -54,16 +54,10 @@ $(BUILD)/kernel.o: src/visionfive2/kernel.c | $(BUILD)
 $(BUILD)/bootstrap.o: $(ASM_SRC) | $(BUILD)
 	@echo "Assembling $<..."
 	$(AS) -o $@ $<
-endif
-	@echo "Assembling $<..."
-	$(AS) -o $@ $<
 
 # Create the build directory if it doesn't exist
 $(BUILD):
 	mkdir -p $(BUILD)
-
-fish: 
-	make -C fishlibc
 
 # Clean up build files
 clean:
