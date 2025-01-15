@@ -1,22 +1,31 @@
-# Cross-Compile Tools
+# Complation Tools
+ifdef VISIONFIVE2
 CC = riscv64-unknown-elf-gcc
 AS = riscv64-unknown-elf-as
 LD = riscv64-unknown-elf-ld
+OBJCOPY = riscv64-unknown-elf-objcopy
+else
+CC = gcc
+AS = as
+LD = ld
+OBJCOPY = objcopy
+endif
 
-# Directories
+# Build directory
 BUILD = build
 
-
-# Source files
+# Files needed for build.
 C_SRC = src/kernel.c
-ASM_SRC = src/bootstrap.s
-# Linker script
-LINKER_SCRIPT = src/linker.ld
+ifdef VISIONFIVE2
+ASM_SRC = src/visionfive2/bootstrap.s
+LINKER_SCRIPT = src/visionfive2/linker.ld
+else
+# TODO: Add support for x86_64
+endif
 
 # Flags
 CFLAGS = -Wall -O2 -ffreestanding -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
 LDFLAGS = -T $(LINKER_SCRIPT)
-
 
 # Output
 TARGET = $(BUILD)/OS-X5.elf
@@ -34,15 +43,18 @@ all: $(TARGET)
 $(TARGET): $(OBJ) | $(BUILD)
 	@echo "Linking $(TARGET)..."
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJ)
-	riscv64-unknown-elf-objcopy -O binary $(TARGET) $(TARGET_BIN)
+	$(OBJCOPY) -O binary $(TARGET) $(TARGET_BIN)
 
-# Compile C source file
-$(BUILD)/kernel.o: src/kernel.c | $(BUILD)
+# Compile Main Kernel C file
+$(BUILD)/kernel.o: src/visionfive2/kernel.c | $(BUILD)
 	@echo "Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Assemble assembly files
-$(BUILD)/bootstrap.o: src/bootstrap.s | $(BUILD)
+# Assemble bootstrap code
+$(BUILD)/bootstrap.o: $(ASM_SRC) | $(BUILD)
+	@echo "Assembling $<..."
+	$(AS) -o $@ $<
+endif
 	@echo "Assembling $<..."
 	$(AS) -o $@ $<
 
@@ -57,8 +69,3 @@ fish:
 clean:
 	@echo "Cleaning up..."
 	rm -rf $(BUILD)/*.o $(TARGET) $(TARGET_BIN)
-# Test the build with QEMU
-test:
-	qemu-system-riscv64 -bios none -nographic -machine virt -kernel $(TARGET_BIN)
-
-.PHONY: all fish clean test 

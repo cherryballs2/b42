@@ -1,0 +1,7 @@
+{
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "terminal.explorerKind": "integrated",
+    "terminal.integrated.env.windows": {
+        "terminalType": "C:\\MinGW\\msys\\1.0\\msys.bat"
+    }
+}
