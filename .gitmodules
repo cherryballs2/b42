@@ -1,0 +1,3 @@
+[submodule "X5-Build"]
+	path = X5-Build
+	url = https://github.com/MatthewLeeStingleyII/X5-Build.git
