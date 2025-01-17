@@ -1,4 +1,5 @@
 int main() {
+    #ifdef VF2
     uart_putc('X');
     uart_putc('5');
     uart_putc('\n');
@@ -10,6 +11,7 @@ int main() {
     uart_putc('m');
     uart_putc('e');
     uart_putc('\n');
+    #endif
     while (1) {
         // Loop forever
     }

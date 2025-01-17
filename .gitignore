@@ -14,4 +14,8 @@ compile
 config.status
 install-sh
 missing
-makefile
+Makefile.in 
+Makefile
+*o
+.dirstamp
+.deps
