@@ -2,3 +2,16 @@ build
 buildtools
 ghidra
 bins
+.VSCodeCounter
+aclocal.m4
+config.log
+configure
+configure~
+depcomp
+makefile
+autom4te.cache
+compile
+config.status
+install-sh
+missing
+makefile
